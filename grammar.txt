@@ -1,0 +1,57 @@
+program ::= function
+
+function ::= 'FUN' name '(' arglist? ')' locals 'BEGIN' statements 'END'
+
+statements ::= statement (';' statement)*
+
+statement ::= 'WHILE' relation 'DO' statement
+             |'IF' relation 'THEN' statement ('ELSE' statement)?
+             |location ':=' expr
+             |'PRINT' '(' literal ')'
+             |'WRITE' '(' expr ')'
+             |'READ' '(' location ')'
+             |'RETURN' expr
+             | name '(' exprlist ')'
+             | 'SKIP' 
+             | 'BREAK' 
+             | 'BEGIN' statements 'END'
+
+expr ::= expr '+' expr
+        |expr '-' expr
+        |expr '*' expr
+        |expr '/' expr
+        |'-' expr
+        |'+' expr
+        |'(' expr ')'
+        |name '(' exprlist ')'
+        |name
+        |name '[' int ']'
+        |num
+        |('INT' | 'FLOAT') '(' expr ')'
+        
+exprlist ::= expr (',' expr)+
+
+relation ::= expr ('<'|'<='|'>'|'>='|'=='|'!='|) expr 
+            | relation ('AND'|'OR') relation 
+            | 'NOT' relation 
+            | '(' relation ')'
+
+arg ::= name ':' ('INT' | 'FLOAT' | 'INT' '[' int ']')
+
+arglist ::= arg (',' arg)*
+
+locals ::= (arg ';' | function ';')*
+
+location ::= name | name '[' int ']'
+
+num ::= int | float
+
+int ::= '-'?[1-9][0-9]*
+
+float ::= '-'? ( '0' | [1-9] [0-9]* ) ',' [0-9]+ ( 'e' ( '+' | '-' ) [0-9]+ )?
+
+array ::= 'INT' '[' int ']' | 'FLOAT' '[' float ']'
+
+name ::= [a-zA-Z]+ [0-9]* [a-zA-Z]*
+
+literal ::= ".*"

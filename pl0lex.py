@@ -86,5 +86,3 @@ if __name__ == '__main__':
 int main(int argc, char *argv[]) {
     
 }
-prueba
-def 
