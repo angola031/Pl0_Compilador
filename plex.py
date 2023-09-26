@@ -68,9 +68,15 @@ def main(argv):
     
     lex = Lexer()
     txt = open(argv[1]).read()
+    
 
     for tok in lex.tokenize(txt):
         print(tok)
+    '''
+    txt = "test.pl0"
+    with open(txt, "r") as archivo:
+        text = archivo.read()'''
+
 
 
 if __name__ == '__main__':
